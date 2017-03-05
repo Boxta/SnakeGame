@@ -16,18 +16,18 @@ private:
 	public:
 		void InitHead(const GridLocation& loc);
 		void InitBody();
-		void MoveBy(const GridLocation& loc);
-		void Follow(const Segment& next);
+		void MoveHeadSegment(const GridLocation& loc);
+		void BodySegmentFollow(const Segment& next);
 		void Draw(Board& brd);
 	private:
-		GridLocation loc;
-		Color c;
+		GridLocation SegmentLocation;
+		Color SegmentColor;
 	};
 
 private:
 	static constexpr int nSegmentsMax = 100;
 	int nSegmentsUsed = 1;
-	Segment segments[nSegmentsMax];
+	Segment SegmentArray[nSegmentsMax];
 
 };
 

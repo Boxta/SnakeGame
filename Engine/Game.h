@@ -51,6 +51,6 @@ private:
 	GridLocation delta_loc = { 0, 1 };
 	std::random_device rd;
 	std::mt19937 rng;
-	static constexpr int snekMovePeriod = 20;
+	static constexpr int snekMovePeriod = 10;
 	int snekMoveCounter = 0;
 };

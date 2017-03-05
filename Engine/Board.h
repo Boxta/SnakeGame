@@ -13,9 +13,12 @@ public:
 	void DrawCell(GridLocation& new_loc, Color c);
 
 private:
-	static constexpr int Width = 10; 
-	static constexpr int Height = 10;
-	static constexpr int Dimension = 20;
+	static constexpr int Dimension = 10;
+	static constexpr int Width = 40; 
+	static constexpr int Height = 40;
+	static constexpr int Off_X_Position = 100;
+	static constexpr int Off_Y_Position = 100;
+	static constexpr int CellPadding = 2;
 	Graphics& graphics;
 };
 

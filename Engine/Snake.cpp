@@ -4,9 +4,8 @@
 
 Snake::Snake(const GridLocation& loc)
 {
-	segments[0].InitHead(loc);
+	SegmentArray[0].InitHead(loc);
 }
-
 
 Snake::~Snake()
 {
@@ -17,16 +16,16 @@ void Snake::MoveBy(GridLocation & delta_loc)
 	//Foreach Segment Currently Used That is Not The Head
 	for (int i = nSegmentsUsed - 1; i > 0; i--)
 	{
-		segments[i].Follow(segments[i - 1]);
+		SegmentArray[i].BodySegmentFollow(SegmentArray[i - 1]);
 	}
-	segments[0].MoveBy(delta_loc);
+	SegmentArray[0].MoveHeadSegment(delta_loc);
 }
 
 void Snake::Grow()
 {
 	if (nSegmentsUsed < nSegmentsMax)
 	{
-		segments[nSegmentsUsed].InitBody();
+		SegmentArray[nSegmentsUsed].InitBody();
 		nSegmentsUsed++;
 	}
 }
@@ -35,33 +34,33 @@ void Snake::Draw(Board & brd)
 {
 	for (int x = 0; x < nSegmentsUsed; x++)
 	{
-		segments[x].Draw(brd);
+		SegmentArray[x].Draw(brd);
 	}
 }
 
 void Snake::Segment::InitHead(const GridLocation & in_loc)
 {
-	loc = in_loc;
-	c = Colors::Yellow;
+	SegmentLocation = in_loc;
+	SegmentColor = Colors::Yellow;
 }
 
 void Snake::Segment::InitBody()
 {
-	c = Colors::Magenta;
+	SegmentColor = Colors::Magenta;
 }
 
-void Snake::Segment::MoveBy(const GridLocation & delta_loc)
+void Snake::Segment::MoveHeadSegment(const GridLocation & delta_loc)
 {
 	assert(abs(delta_loc.x) + abs(delta_loc.y) == 1);
-	loc.Add(delta_loc);
+	SegmentLocation.Add(delta_loc);
 }
 
-void Snake::Segment::Follow(const Segment & next)
+void Snake::Segment::BodySegmentFollow(const Segment & next)
 {
-	loc = next.loc;
+	SegmentLocation = next.SegmentLocation;
 }
 
 void Snake::Segment::Draw(Board & brd)
 {
-	brd.DrawCell(loc, c);
+	brd.DrawCell(SegmentLocation, SegmentColor);
 }
