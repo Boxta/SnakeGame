@@ -38,7 +38,7 @@ void Snake::Draw(Board & brd)
 		segments[x].Draw(brd);
 	}
 }
-//coment
+
 void Snake::Segment::InitHead(const GridLocation & in_loc)
 {
 	loc = in_loc;
