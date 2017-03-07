@@ -1,14 +1,11 @@
 #include "Board.h"
 
-
-
 Board::Board(Graphics& gfx)
 	:
 	graphics(gfx)
 {
 
 }
-
 
 Board::~Board()
 {
@@ -49,3 +46,12 @@ void Board::DrawCell(GridLocation& new_loc, Color c)
 		Dimension,
 		c);
 }
+
+bool Board::IsOnBoard(GridLocation & newloc)
+{
+	return newloc.x < 0 ||
+		newloc.y < 0 ||
+		newloc.x > Width ||
+		newloc.y > Height;
+}
+

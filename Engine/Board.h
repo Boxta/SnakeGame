@@ -11,7 +11,7 @@ public:
 	int GetGridWidth() const;
 	int GetGridHeight() const;
 	void DrawCell(GridLocation& new_loc, Color c);
-
+	bool IsOnBoard(GridLocation& newloc);
 private:
 	static constexpr int Dimension = 10;
 	static constexpr int Width = 40; 

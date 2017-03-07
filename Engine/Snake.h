@@ -8,6 +8,8 @@ public:
 
 	void MoveBy(GridLocation& delta_loc);
 	void Grow();
+	GridLocation NextHeadLocation(GridLocation& delta_loc);
+	bool IsOnSnakeSegment(GridLocation& delta_loc);
 	void Draw( Board& brd);
 
 private:
@@ -19,6 +21,7 @@ private:
 		void MoveHeadSegment(const GridLocation& loc);
 		void BodySegmentFollow(const Segment& next);
 		void Draw(Board& brd);
+		const GridLocation& GetLocation() const;
 	private:
 		GridLocation SegmentLocation;
 		Color SegmentColor;

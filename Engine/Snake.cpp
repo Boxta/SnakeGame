@@ -1,7 +1,5 @@
 #include "Snake.h"
 
-
-
 Snake::Snake(const GridLocation& loc)
 {
 	SegmentArray[0].InitHead(loc);
@@ -29,6 +27,26 @@ void Snake::Grow()
 		nSegmentsUsed++;
 	}
 }
+
+GridLocation Snake::NextHeadLocation(GridLocation& delta_loc)
+{
+	GridLocation l(SegmentArray[0].GetLocation());
+	l.Add(delta_loc);
+	return l;
+}
+
+bool Snake::IsOnSnakeSegment(GridLocation & delta_loc)
+{
+	for (int i = 0; i < nSegmentsUsed - 1; i++)
+	{
+		if (SegmentArray[i].GetLocation() == delta_loc)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 
 void Snake::Draw(Board & brd)
 {
@@ -63,4 +81,9 @@ void Snake::Segment::BodySegmentFollow(const Segment & next)
 void Snake::Segment::Draw(Board & brd)
 {
 	brd.DrawCell(SegmentLocation, SegmentColor);
+}
+
+const GridLocation& Snake::Segment::GetLocation() const
+{
+	return SegmentLocation;
 }

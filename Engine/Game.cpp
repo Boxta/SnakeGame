@@ -53,7 +53,7 @@ void Game::UpdateModel()
 	{
 		delta_loc = { -1, 0 };
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) 
 	{
 		delta_loc = { 1, 0 };
 	}
@@ -62,6 +62,15 @@ void Game::UpdateModel()
 	if (snekMoveCounter >= snekMovePeriod)
 	{
 		snekMoveCounter = 0;
+		GridLocation newloc = Snek.NextHeadLocation(delta_loc);
+		if (Brd.IsOnBoard(Snek.NextHeadLocation(delta_loc)) || Snek.IsOnSnakeSegment(Snek.NextHeadLocation(delta_loc)))
+		{
+			GameIsOver = true;
+		}
+		if (GameIsOver)
+		{
+			//Draw Game Over Image
+		}
 		if (wnd.kbd.KeyIsPressed(VK_CONTROL))
 		{
 			Snek.Grow();

@@ -52,5 +52,6 @@ private:
 	std::random_device rd;
 	std::mt19937 rng;
 	static constexpr int snekMovePeriod = 10;
+	bool GameIsOver = false;
 	int snekMoveCounter = 0;
 };
