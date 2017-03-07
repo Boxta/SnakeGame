@@ -65,23 +65,18 @@ void Game::UpdateModel()
 		{
 			GridLocation newloc = Snek.NextHeadLocation(delta_loc);
 			snekMoveCounter = 0;
-			//Check Food Collision
-			if (food.FoodEaten(newloc))
-			{
-				
-
-			}
 
 			//Check For Game Over Condition
-			
 			if (Brd.IsOnBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
 			{
 				GameIsOver = true;
 			}
 			else
 			{
-				if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+				//Check Food Collision
+				if (food.FoodEaten(newloc))
 				{
+					food. SetLocation(GetEmptyPosition());
 					Snek.Grow();
 				}
 				Snek.MoveBy(delta_loc);
@@ -102,9 +97,9 @@ GridLocation & Game::GetEmptyPosition() const
 	do
 	{
 		temp = { XPosRand(rng), YPosRand(rng) };
-	}while (Snek.IsOnSnakeSegment(temp) || temp == food.Location)
+	}while (Snek.IsOnSnakeSegment(temp) || temp == food.Location);
 	
-	
+	return temp;
 }
 
 void Game::ComposeFrame()
