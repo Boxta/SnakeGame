@@ -94,22 +94,18 @@ void Game::UpdateModel()
 	}
 }
 
-//GridLocation & Game::EmtpyPosition() const
-//{
-//	for (int i = 0; i < Brd.GetGridWidth(); i++)
-//	{
-//		for (int g = 0; g < Brd.GetGridHeight(); g++)
-//		{
-//			//GridLocation temp = { i, g };
-//			//if (Snek.IsOnSnakeSegment(temp))
-//			//{
-//			//	continue;
-//			//}
-//
-//		}
-//	}
-//
-//}
+GridLocation & Game::GetEmptyPosition() const
+{
+	std::uniform_int_distribution<int> XPosRand(0, Brd.GetGridWidth());
+	std::uniform_int_distribution<int> YPosRand(0, Brd.GetGridHeight());
+	GridLocation temp;
+	do
+	{
+		temp = { XPosRand(rng), YPosRand(rng) };
+	}while (Snek.IsOnSnakeSegment(temp) || temp == food.Location)
+	
+	
+}
 
 void Game::ComposeFrame()
 {
