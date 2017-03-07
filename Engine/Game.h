@@ -39,7 +39,7 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
-	//GridLocation& EmtpyPosition() const;
+	GridLocation& GetEmptyPosition() const;
 	/********************************/
 	/*  User Functions              */
 	/********************************/
