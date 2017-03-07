@@ -41,41 +41,47 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_UP))
+	if (!GameIsOver)
 	{
-		delta_loc = { 0, -1 };
-	}
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
-	{
-		delta_loc = { 0, 1 };
-	}
-	if (wnd.kbd.KeyIsPressed(VK_LEFT))
-	{
-		delta_loc = { -1, 0 };
-	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT)) 
-	{
-		delta_loc = { 1, 0 };
-	}
-	
-	snekMoveCounter++;
-	if (snekMoveCounter >= snekMovePeriod)
-	{
-		snekMoveCounter = 0;
-		GridLocation newloc = Snek.NextHeadLocation(delta_loc);
-		if (Brd.IsOnBoard(Snek.NextHeadLocation(delta_loc)) || Snek.IsOnSnakeSegment(Snek.NextHeadLocation(delta_loc)))
+		if (wnd.kbd.KeyIsPressed(VK_UP))
 		{
-			GameIsOver = true;
+			delta_loc = { 0, -1 };
 		}
-		if (GameIsOver)
+		if (wnd.kbd.KeyIsPressed(VK_DOWN))
 		{
-			//Draw Game Over Image
+			delta_loc = { 0, 1 };
 		}
-		if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+		if (wnd.kbd.KeyIsPressed(VK_LEFT))
 		{
-			Snek.Grow();
+			delta_loc = { -1, 0 };
 		}
-		Snek.MoveBy(delta_loc);
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		{
+			delta_loc = { 1, 0 };
+		}
+
+		snekMoveCounter++;
+		if (snekMoveCounter >= snekMovePeriod)
+		{
+			snekMoveCounter = 0;
+			GridLocation newloc = Snek.NextHeadLocation(delta_loc);
+			if (Brd.IsOnBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
+			{
+				GameIsOver = true;
+			}
+			else
+			{
+				if (wnd.kbd.KeyIsPressed(VK_CONTROL))
+				{
+					Snek.Grow();
+				}
+				Snek.MoveBy(delta_loc);
+			}
+		}
+	}
+	else
+	{
+		SpriteCodex::DrawGameOver(300, 300, gfx);
 	}
 }
 

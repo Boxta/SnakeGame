@@ -26,6 +26,7 @@
 #include "Board.h"
 #include <random>
 #include "Snake.h"
+#include "SpriteCodex.h"
 
 class Game
 {
