@@ -16,9 +16,10 @@ private:
 	static constexpr int Dimension = 10;
 	static constexpr int Width = 40; 
 	static constexpr int Height = 40;
-	static constexpr int Off_X_Position = 100;
-	static constexpr int Off_Y_Position = 100;
 	static constexpr int CellPadding = 2;
+	static constexpr int Off_X_Position = Graphics::ScreenWidth - (Dimension * Width) - (Width * CellPadding) - 1;
+	static constexpr int Off_Y_Position = Graphics::ScreenHeight - (Dimension * Height) - (Height * CellPadding) - 1;
+
 	Graphics& graphics;
 };
 

@@ -63,8 +63,17 @@ void Game::UpdateModel()
 		snekMoveCounter++;
 		if (snekMoveCounter >= snekMovePeriod)
 		{
-			snekMoveCounter = 0;
 			GridLocation newloc = Snek.NextHeadLocation(delta_loc);
+			snekMoveCounter = 0;
+			//Check Food Collision
+			if (food.FoodEaten(newloc))
+			{
+				
+
+			}
+
+			//Check For Game Over Condition
+			
 			if (Brd.IsOnBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
 			{
 				GameIsOver = true;
@@ -81,9 +90,26 @@ void Game::UpdateModel()
 	}
 	else
 	{
-		SpriteCodex::DrawGameOver(300, 300, gfx);
+		SpriteCodex::DrawGameOver(400, 350, gfx);
 	}
 }
+
+//GridLocation & Game::EmtpyPosition() const
+//{
+//	for (int i = 0; i < Brd.GetGridWidth(); i++)
+//	{
+//		for (int g = 0; g < Brd.GetGridHeight(); g++)
+//		{
+//			//GridLocation temp = { i, g };
+//			//if (Snek.IsOnSnakeSegment(temp))
+//			//{
+//			//	continue;
+//			//}
+//
+//		}
+//	}
+//
+//}
 
 void Game::ComposeFrame()
 {
@@ -99,3 +125,5 @@ void Game::ComposeFrame()
 	//	}
 	//}
 }
+
+

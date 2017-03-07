@@ -27,6 +27,7 @@
 #include <random>
 #include "Snake.h"
 #include "SpriteCodex.h"
+#include "SnakeFood.h"
 
 class Game
 {
@@ -38,6 +39,7 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
+	//GridLocation& EmtpyPosition() const;
 	/********************************/
 	/*  User Functions              */
 	/********************************/
@@ -55,4 +57,5 @@ private:
 	static constexpr int snekMovePeriod = 10;
 	bool GameIsOver = false;
 	int snekMoveCounter = 0;
+	SnakeFood food;
 };
