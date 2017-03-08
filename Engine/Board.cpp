@@ -49,7 +49,7 @@ void Board::DrawCell(GridLocation& new_loc, Color c)
 		c);
 }
 
-bool Board::IsOnBoard(GridLocation & newloc)
+bool Board::IsOffBoard(GridLocation & newloc)
 {
 	return newloc.x < 0 ||
 		newloc.y < 0 ||
