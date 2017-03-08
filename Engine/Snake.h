@@ -11,7 +11,6 @@ public:
 	GridLocation NextHeadLocation(GridLocation& delta_loc);
 	bool IsOnSnakeSegment(GridLocation& delta_loc);
 	void Draw( Board& brd);
-	GridLocation[] SnakeSegmentLocations();
 
 private:
 	class Segment

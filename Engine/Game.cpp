@@ -29,6 +29,8 @@ Game::Game( MainWindow& wnd )
 	rng( std::random_device()() ),
 	Snek( {2, 2} )
 {
+	GridLocation o{ 10,10 };
+	food.InitFood(o);
 }
 
 void Game::Go()
@@ -43,19 +45,19 @@ void Game::UpdateModel()
 {
 	if (!GameIsOver)
 	{
-		if (wnd.kbd.KeyIsPressed(VK_UP))
+		if (wnd.kbd.KeyIsPressed(VK_UP) && delta_loc.x != 0 && delta_loc.y != 1)
 		{
 			delta_loc = { 0, -1 };
 		}
-		if (wnd.kbd.KeyIsPressed(VK_DOWN))
+		if (wnd.kbd.KeyIsPressed(VK_DOWN) && delta_loc.x != 0 && delta_loc.y != -1)
 		{
 			delta_loc = { 0, 1 };
 		}
-		if (wnd.kbd.KeyIsPressed(VK_LEFT))
+		if (wnd.kbd.KeyIsPressed(VK_LEFT) && delta_loc.x != -1 && delta_loc.y != 0)
 		{
 			delta_loc = { -1, 0 };
 		}
-		if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+		if (wnd.kbd.KeyIsPressed(VK_RIGHT) && delta_loc.x != 1 && delta_loc.y != 0)
 		{
 			delta_loc = { 1, 0 };
 		}
@@ -89,10 +91,10 @@ void Game::UpdateModel()
 	}
 }
 
-GridLocation & Game::GetEmptyPosition() const
+GridLocation & Game::GetEmptyPosition()
 {
-	std::uniform_int_distribution<int> XPosRand(0, Brd.GetGridWidth());
-	std::uniform_int_distribution<int> YPosRand(0, Brd.GetGridHeight());
+	std::uniform_int_distribution<int> XPosRand(0, Brd.GetGridWidth() - 1);
+	std::uniform_int_distribution<int> YPosRand(0, Brd.GetGridHeight() - 1);
 	GridLocation temp;
 	do
 	{
@@ -105,6 +107,7 @@ GridLocation & Game::GetEmptyPosition() const
 void Game::ComposeFrame()
 {
 	Snek.Draw(Brd);
+	food.Draw(Brd);
 }
 
 
