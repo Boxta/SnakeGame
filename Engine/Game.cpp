@@ -78,8 +78,42 @@ void Game::UpdateModel()
 				//Check Food Collision
 				if (food.FoodEaten(newloc))
 				{
+					snekSpeedCounter++;
 					food. SetLocation(GetEmptyPosition());
 					Snek.Grow();
+					if (snekSpeedCounter == 2 && snekMovePeriod >= snekSpeedMax)
+					{
+						snekSpeedCounter = 0;
+						snekMovePeriod -= 2;
+						switch (snekMovePeriod)
+						{
+							case 13:
+							{
+								food.Col = Colors::Cyan;
+								break;
+							}
+							case 11:
+							{
+								food.Col = Colors::LightGray;
+								break;
+							}
+							case 9:
+							{
+								food.Col = Colors::White;
+								break;
+							}
+							case 7:
+							{
+								food.Col = Colors::Red;
+								break;
+							}
+							default:
+							{
+								food.Col = Colors::Red;
+								break;
+							}
+						}
+					}
 				}
 				Snek.MoveBy(delta_loc);
 			}
