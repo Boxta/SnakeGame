@@ -67,7 +67,7 @@ void Game::UpdateModel()
 			snekMoveCounter = 0;
 
 			//Check For Game Over Condition
-			if (Brd.IsOnBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
+			if (Brd.IsOffBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
 			{
 				GameIsOver = true;
 			}
@@ -105,16 +105,6 @@ GridLocation & Game::GetEmptyPosition() const
 void Game::ComposeFrame()
 {
 	Snek.Draw(Brd);
-	//std::uniform_int_distribution<int> colorDist(0, 255);
-	//for (int y = 0; y < Brd.GetGridHeight(); y++)
-	//{
-	//	for (int x = 0; x < Brd.GetGridWidth(); x++)
-	//	{
-	//		GridLocation newloc = { x, y };
-	//		Color c(colorDist(rng), colorDist(rng), colorDist(rng));
-	//		Brd.DrawCell(newloc, c);
-	//	}
-	//}
 }
 
 
