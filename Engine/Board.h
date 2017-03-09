@@ -14,8 +14,8 @@ public:
 	bool IsOffBoard(GridLocation& newloc);
 private:
 	static constexpr int Dimension = 10;
-	static constexpr int Width = 20; 
-	static constexpr int Height = 20;
+	static constexpr int Width = 40; 
+	static constexpr int Height = 40;
 	static constexpr int CellPadding = 2;
 	static constexpr int Off_X_Position = Graphics::ScreenWidth - (Dimension * Width) - (Width * CellPadding) - 50;
 	static constexpr int Off_Y_Position = Graphics::ScreenHeight - (Dimension * Height) - (Height * CellPadding) - 50;

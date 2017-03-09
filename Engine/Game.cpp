@@ -85,6 +85,7 @@ void Game::UpdateModel()
 					{
 						snekSpeedCounter = 0;
 						snekMovePeriod -= 2;
+						//Change Food Color Based On Speed
 						switch (snekMovePeriod)
 						{
 							case 13:
@@ -99,12 +100,12 @@ void Game::UpdateModel()
 							}
 							case 9:
 							{
-								food.Col = Colors::White;
+								food.Col = Colors::Magenta;
 								break;
 							}
 							case 7:
 							{
-								food.Col = Colors::Red;
+								food.Col = Colors::Blue;
 								break;
 							}
 							default:
