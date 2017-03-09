@@ -28,6 +28,7 @@
 #include "Snake.h"
 #include "SpriteCodex.h"
 #include "SnakeFood.h"
+#include "Frametimer.h"
 
 class Game
 {
@@ -49,15 +50,16 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	Frametimer delta_time;
 	Board Brd;
 	Snake Snek;
 	GridLocation delta_loc = { 0, 1 };
 	std::random_device rd;
 	std::mt19937 rng;
-	int snekMovePeriod = 15;
+	float GameUpdateInterval = 0.2f;
 	bool GameIsOver = false;
-	int snekMoveCounter = 0;
-	int snekSpeedCounter = 0;
-	int snekSpeedMax = 7;
+	float GameUpdateIntervalCounter = 0.0f;
+	int SnekSpeedUpdateCounter = 0;
+	float MaxIntervalUpdateSpeed = 0.05f;
 	SnakeFood food;
 };

@@ -61,12 +61,12 @@ void Game::UpdateModel()
 		{
 			delta_loc = { 1, 0 };
 		}
-
-		snekMoveCounter++;
-		if (snekMoveCounter >= snekMovePeriod)
+		
+		GameUpdateIntervalCounter += delta_time.SetMark();
+		if (GameUpdateIntervalCounter >= GameUpdateInterval)
 		{
 			GridLocation newloc = Snek.NextHeadLocation(delta_loc);
-			snekMoveCounter = 0;
+			GameUpdateIntervalCounter = 0;
 
 			//Check For Game Over Condition
 			if (Brd.IsOffBoard(newloc) || Snek.IsOnSnakeSegment(newloc))
@@ -78,42 +78,13 @@ void Game::UpdateModel()
 				//Check Food Collision
 				if (food.FoodEaten(newloc))
 				{
-					snekSpeedCounter++;
+					SnekSpeedUpdateCounter++;
 					food. SetLocation(GetEmptyPosition());
 					Snek.Grow();
-					if (snekSpeedCounter == 2 && snekMovePeriod >= snekSpeedMax)
+					if (SnekSpeedUpdateCounter == 2 && GameUpdateInterval >= MaxIntervalUpdateSpeed)
 					{
-						snekSpeedCounter = 0;
-						snekMovePeriod -= 2;
-						//Change Food Color Based On Speed
-						switch (snekMovePeriod)
-						{
-							case 13:
-							{
-								food.Col = Colors::Cyan;
-								break;
-							}
-							case 11:
-							{
-								food.Col = Colors::LightGray;
-								break;
-							}
-							case 9:
-							{
-								food.Col = Colors::Magenta;
-								break;
-							}
-							case 7:
-							{
-								food.Col = Colors::Blue;
-								break;
-							}
-							default:
-							{
-								food.Col = Colors::Red;
-								break;
-							}
-						}
+						SnekSpeedUpdateCounter = 0;
+						GameUpdateInterval -= 0.02f;
 					}
 				}
 				Snek.MoveBy(delta_loc);
@@ -122,7 +93,9 @@ void Game::UpdateModel()
 	}
 	else
 	{
-		SpriteCodex::DrawGameOver(400, 350, gfx);
+		SpriteCodex::DrawGameOver(Brd.Off_X_Position + (Brd.GetGridWidth() * Brd.Dimension / 2), 
+			Brd.Off_Y_Position + (Brd.GetGridHeight() * Brd.Dimension / 2), 
+			gfx);
 	}
 }
 
